@@ -1,136 +1,153 @@
 # Bountiful File Map
 
-Every file across all four repos, annotated.
+Every file across the four repos, annotated. Directories come first, then files, alphabetically within each level, following Codium's order: names beginning with a dot or underscore sort before letters.
+
 Last updated: September 2026
 
 
 ## bountiful
 
+The agent template. Users clone it under their agent's name.
+
+```
 bountiful/
 ├── .github/
-│   └── FUNDING.yml       # GitHub funding file; build.py removes for end user
+│   └── FUNDING.yml         # Funding file; build.py removes it on first run
+├── context/
+│   └── _README.md          # How to use context/; never loaded
 ├── tools/
-│   └── TOOLS.md          # Explains box tool structure
+│   └── _README.md          # How plugin tool groups work; never loaded
 ├── .gitignore
-├── add_secrets.py        # Shim → basic_bot.setup.secrets.run()
-├── add_tools.py          # Shim → basic_bot.setup.tools.run()
-├── build.py              # First-run setup: name, venv, pip, infrastructure
-├── config.toml           # Agent overrides: provider, port, model
-├── dashboard.json        # Agent identity: id, name
+├── add_secrets.py          # Shim: store API keys in the keyring
+├── add_tools.py            # Shim: install tool groups from extend-a-bot
+├── build.py                # Name agent, build venv, install deps, infrastructure
+├── config.toml             # Agent overrides of engine and UI defaults
+├── dashboard.json          # Agent identity: id and display name
 ├── LICENSE
-├── persona.md            # Agent personality, user-authored
-├── pyproject.toml        # Pins basic-bot and basic-ui versions
-├── README.md             # End-user quickstart
-├── run.py                # Shim → basic_ui.launch.launch()
+├── persona.md              # Agent personality, user-authored
+├── pyproject.toml          # Pins basic-bot and basic-ui versions
+├── README.md               # End-user quickstart
+└── run.py                  # Shim: launch the agent
+```
 
 
 ## basic-bot
 
+The engine: memory, providers, tools, prompt assembly, infrastructure.
+
+```
 basic-bot/
 ├── .github/
 │   └── FUNDING.yml
 ├── basic_bot/
 │   ├── infrastructure/
 │   │   ├── __init__.py
-│   │   ├── llamacpp.py       # Clone and compile llama.cpp from source
-│   │   ├── orchestration.py  # Fold lifecycle — sequential server management
-│   │   └── server.py         # llama-server start, stop, health check
+│   │   ├── llamacpp.py         # Clone and compile llama.cpp
+│   │   ├── orchestration.py    # Fold with sequential server lifecycle
+│   │   └── server.py           # llama-server start, stop, health check
 │   ├── instructions/
-│   │   └── capabilities.md   # Engine-owned system prompt section
+│   │   ├── capabilities.md     # System prompt: memory and retrieval
+│   │   └── output.md           # System prompt: reply formatting
 │   ├── profiles/
-│   │   └── nvidia_12gb.toml  # Hardware profile: models, launch args, sampling
+│   │   └── nvidia_12gb.toml    # Hardware profile: models, launch args, sampling
 │   ├── providers/
 │   │   ├── __init__.py
-│   │   ├── claude.py         # ClaudeProvider — Anthropic API
-│   │   ├── local.py          # LocalProvider — llama-server HTTP client
-│   │   ├── protocol.py       # InferenceProvider protocol, ChatResponse, ModelInfo
-│   │   └── registry.py       # ChatProviderRegistry — composite provider with lifecycle
+│   │   ├── claude.py           # ClaudeProvider: Anthropic API
+│   │   ├── local.py            # LocalProvider: llama-server client
+│   │   ├── protocol.py         # InferenceProvider protocol, ModelInfo, ChatResponse
+│   │   └── registry.py         # Composite chat provider; switches models and servers
 │   ├── setup/
 │   │   ├── __init__.py
-│   │   ├── secrets.py        # API key storage via keyring
-│   │   └── tools.py          # Tool group installation from extend-a-bot
+│   │   ├── secrets.py          # Key prompts behind add_secrets.py
+│   │   └── tools.py            # Tool group install behind add_tools.py
 │   ├── tool_belt/
 │   │   ├── __init__.py
-│   │   ├── recall_message.py # Deterministic lookup by seq, range, or date
-│   │   └── search_archive.py # Semantic vector search over RAG archive
+│   │   ├── recall_message.py   # Lookup by sequence number, range, or date
+│   │   └── search_archive.py   # Semantic search over the archive
 │   ├── __init__.py
-│   ├── __main__.py           # Build orchestrator: hardware, llama.cpp, models
-│   ├── chat.py               # Chat loop, system prompt, tool execution
-│   ├── config.py             # Engine defaults, overridable via config.toml
-│   ├── diagnostics.py        # Memory snapshots for fold debugging
-│   ├── embeddings.py         # Embedder protocol, LocalEmbedder, ManagedEmbedder
-│   ├── factory.py            # create_runtime() — builds BotRuntime from agent dir
-│   ├── fold.py               # Fold trigger logic, RAG + summary coordination
-│   ├── memory.py             # Context builder — window, summary, system prompt
-│   ├── profile.py            # Hardware detection, profile loading, model catalog
-│   ├── rag.py                # Turn pairing, embedding, vector search
-│   ├── runtime.py            # BotRuntime dataclass
-│   ├── secrets_env.py        # Load API keys from keyring into environment
-│   ├── store.py              # MessageStore protocol
-│   ├── store_sqlite.py       # SQLite implementation — messages, state, vectors
-│   ├── summary.py            # Rolling summary prompt and generation
-│   └── tools.py              # Tool registry — belt + box discovery
-├── scripts/
-│   ├── backfill_rag.py       # Legacy: backfill RAG vectors
-│   ├── backfill_seq.py       # Legacy: backfill sequence numbers
-│   ├── rebuild_summary.py    # Regenerate rolling summary from scratch
-│   ├── reembed.py            # Re-embed all vectors after model change
-│   ├── test_fold.py          # Manual fold verification
-│   ├── test_fold_lifecycle.py # Manual server lifecycle verification
-│   └── test_rag.py           # Manual RAG verification
+│   ├── __main__.py             # Build entry: hardware, llama.cpp, models
+│   ├── chat.py                 # Prompt assembly, turn note, tool loop
+│   ├── config.py               # Engine defaults, overridable in config.toml
+│   ├── diagnostics.py          # Memory snapshots during a fold
+│   ├── embeddings.py           # Embedder protocol, LocalEmbedder, ManagedEmbedder
+│   ├── factory.py              # create_runtime(): assembles the BotRuntime
+│   ├── fold.py                 # Fold trigger; embeds, then summarizes
+│   ├── memory.py               # Loads the sliding window with seq annotations
+│   ├── profile.py              # Hardware detection and profile loading
+│   ├── rag.py                  # Turn pairing, embedding, truncation, search
+│   ├── runtime.py              # BotRuntime dataclass
+│   ├── secrets_env.py          # Loads the Anthropic key into the environment
+│   ├── store.py                # MessageStore protocol
+│   ├── store_sqlite.py         # SQLite store: messages, state, summaries, vectors
+│   ├── summary.py              # Rolling summary prompt and generation
+│   └── tools.py                # Tool registry: belt plus box
+├── scripts/                    # Stale; to be revised, moved, or removed
+│   ├── backfill_rag.py
+│   ├── backfill_seq.py
+│   ├── rebuild_summary.py
+│   ├── reembed.py
+│   ├── test_fold.py
+│   ├── test_fold_lifecycle.py
+│   └── test_rag.py
 ├── .gitignore
 ├── LICENSE
 ├── pyproject.toml
 └── README.md
+```
 
 
 ## basic-ui
 
+The reference web interface and local launch.
+
+```
 basic-ui/
+├── .github/
+│   └── FUNDING.yml
 ├── basic_ui/
 │   ├── static/
 │   │   ├── css/
-│   │   │   └── styles.css    # Dark-mode styles, responsive layout
+│   │   │   └── styles.css      # Page styles
 │   │   └── js/
-│   │       ├── chat.js       # Message handling, model selection, history
-│   │       ├── globals.d.ts  # TypeScript declarations for Pyright
-│   │       └── jsconfig.json # JS project config
+│   │       ├── chat.js         # Chat interface logic
+│   │       ├── globals.d.ts    # Type declarations for the JS checker
+│   │       └── jsconfig.json   # JS project settings for Codium
 │   ├── templates/
-│   │   └── index.html        # Agent name injected via Jinja2
+│   │   └── index.html          # Page shell; agent name via Jinja2
 │   ├── __init__.py
-│   ├── app.py                # Flask routes: /chat, /models, /history
-│   ├── config.py             # UI defaults: port, debug, reloader
-│   └── launch.py             # Local launch orchestrator: secrets, servers, Flask
-├── .github/
-│   └── FUNDING.yml
-├── .gitignore
+│   ├── app.py                  # Flask routes: /chat, /models, /history
+│   ├── config.py               # UI defaults: port, debug, reloader
+│   └── launch.py               # Local launch: overrides, keys, chat server, Flask
 ├── LICENSE
 ├── pyproject.toml
 └── README.md
+```
 
 
 ## extend-a-bot
 
+Plugin tool groups, copied into an agent's tools/ directory.
+
+```
 extend-a-bot/
 ├── .github/
 │   └── FUNDING.yml
 ├── github/
-│   ├── _auth.py              # GitHub App auth, token caching, normalize_repo()
-│   ├── _config.py            # User-editable: org, committer identity, co-author
+│   ├── _auth.py                  # GitHub App auth, token caching, normalize_repo()
+│   ├── _config.py                # User-editable: org, committer, co-author
 │   ├── create_branch.py
-│   ├── create_or_update_file.py
+│   ├── create_or_update_file.py  # Commits only to a non-default branch
 │   ├── create_pull_request.py
-│   ├── delete_branch.py
-│   ├── delete_file.py
 │   ├── get_commit_history.py
 │   ├── get_repo_info.py
 │   ├── list_branches.py
 │   ├── list_repo_contents.py
 │   ├── list_repos.py
-│   ├── merge_pull_request.py
+│   ├── merge_pull_request.py     # Refuses; directs the user to review on GitHub
 │   ├── read_file.py
-│   └── tool.json             # Manifest: dependencies, secrets, config files
+│   └── tool.json                 # Manifest: dependencies, keys, config
 ├── .gitignore
 ├── LICENSE
 ├── README.md
-└── version.json
+└── version.json                  # Repo-wide version
+```
