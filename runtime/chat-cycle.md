@@ -1,4 +1,4 @@
-# The Chat Cycle
+# Chat Cycle
 
 The chat cycle is what happens between the moment a user sends a message and the moment the reply appears. It is the most frequent path through the engine, and every other runtime behavior, the fold and the search cycle, happens inside or right after it.
 
