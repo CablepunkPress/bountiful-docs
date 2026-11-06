@@ -26,6 +26,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Fold.** Moving the older part of a conversation into the summary, so the conversation fits in the chat model's context window. The web page shows a fold as "Updating memory…".
 
+**Front end.** What you use to talk to an agent, such as the web page or the terminal. Every front end goes through the session.
+
 **Harness.** The software that turns an AI model into an agent. In Bountiful, the harness is basic-bot. We say harness, not engine.
 
 **Hub.** The bountiful repository, which holds the setup and the `bountiful` command, and pins every other part.
@@ -66,7 +68,9 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Repository.** A project's files and their history, kept with git.
 
-**Session.** One run of an agent, from starting it to stopping it. In basic-bot, the session is also the one way every front end, such as the web page, talks to the agent.
+**Runtime.** Everything that makes an agent itself while it runs: its prompt, its tools, its database, and its models. The session is built on it.
+
+**Session.** A running agent, from the moment you start it to the moment you stop it. The web page, and any other front end, talks to the agent through its session.
 
 **Summary.** The agent's written account of the older parts of a conversation, kept up to date by folds.
 
@@ -83,5 +87,7 @@ What the words in these docs mean. These are also the names we've agreed on, for
 **Turn.** One message from you and the agent's reply to it.
 
 **venv.** A virtual environment: a private copy of Python with its own installed packages. Bountiful's is the `.venv` folder in the clone.
+
+**Warming.** Sending the conversation to the chat server ahead of time, so the next message is answered sooner.
 
 **Vulkan.** A standard way for programs to use a graphics card. llama.cpp uses it on GNU/Linux.
