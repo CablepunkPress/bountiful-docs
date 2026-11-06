@@ -6,11 +6,15 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Agent folder.** The folder that holds one agent, such as `~/alice`. Everything that belongs to that agent is in it.
 
+**Annotation.** A hidden note at the start of each message in the prompt, giving its number, when it was written, and, for a reply, which tools it used.
+
 **API key.** A secret code, like a password, that lets a program use an online service on your account.
 
 **Branch.** A line of work in a git repository. Bountiful's releases go to `stable`. New work goes to `main` first.
 
 **Chat model.** The AI model the agent talks with.
+
+**Chat template.** The part of a model that lays out its prompt in the form the model was trained on, including where the tools go.
 
 **Clone.** A copy of a git repository on your computer, made with `git clone`.
 
@@ -56,9 +60,11 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Port.** A numbered door on a computer that a program listens on.
 
+**Prefill.** The opening words of a model's reasoning, given to it at the start of every turn.
+
 **Profile.** The settings that suit a kind of computer: which models to use and how to run them. Setup picks one, such as `metal_32gb` or `vulkan_12gb`.
 
-**Prompt.** Everything the model is given before it answers: the persona, the context, the summary, the recent conversation, and your message.
+**Prompt.** Everything the model is given before it answers: the persona, the instructions, the context, the summary, the recent conversation, and your message.
 
 **Provider.** What answers a model's requests. Today the only provider is llama-server on your computer.
 
