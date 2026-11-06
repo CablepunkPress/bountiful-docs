@@ -1,6 +1,6 @@
 # The prompt
 
-The prompt is everything the chat model is given before it answers. basic-bot builds it fresh for every message, in two parts: the system prompt, which tells the model who it is and what it knows, and the transcript, which is the conversation so far.
+The prompt is everything the chat model is given before it answers. It has three parts: the system prompt, which tells the model who it is and what it knows; the tool definitions, which tell it what tools it has and how to call them; and the transcript, which is the conversation so far. basic-bot builds the system prompt and the transcript fresh for every message. The model's chat template adds the tool definitions between them.
 
 The whole prompt, in order:
 
