@@ -8,5 +8,6 @@
 6. [The session](session.md)
 7. [The prompt](prompt.md)
 8. [Memory](memory.md)
-9. [The model servers](model-servers.md)
-10. [Tools](tools.md)
+9. [Profiles](profiles.md)
+10. [The model servers](model-servers.md)
+11. [Tools](tools.md)

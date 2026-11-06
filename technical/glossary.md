@@ -12,6 +12,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Archive.** Every message an agent and its user have exchanged, kept word for word in its database, which the agent searches with its memory tools.
 
+**Backend.** How llama.cpp uses a computer's graphics chip: Metal on a Mac, Vulkan on GNU/Linux.
+
 **Branch.** A line of work in a git repository. Bountiful's releases go to `stable`. New work goes to `main` first.
 
 **Chat model.** The AI model the agent talks with.
@@ -101,6 +103,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 **Tool group.** A set of tools that work together, added to an agent in one step, such as `wikipedia`.
 
 **Turn.** One message from you and the agent's reply to it.
+
+**Unified memory.** On a Mac, one pool of memory shared by the processor and the graphics chip.
 
 **venv.** A virtual environment: a private copy of Python with its own installed packages. Bountiful's is the `.venv` folder in the clone.
 
