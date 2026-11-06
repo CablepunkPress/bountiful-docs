@@ -28,6 +28,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Default tools.** The tools every agent has, such as searching its past conversations. They come with basic-bot. Also called the tool belt.
 
+**Drafter.** A small, fast helper that guesses the chat model's next few tokens, so the chat model can check several at once and answer faster.
+
 **Embedding.** A long list of numbers that stands for what a piece of text means. Texts with similar meanings get similar embeddings.
 
 **Embedding model.** An AI model that turns text into a list of numbers, so texts with similar meanings get similar numbers. It lets an agent search by meaning.
@@ -47,6 +49,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 **Jack.** A fixed place in basic-bot where another part plugs in. The tools jack takes tools; the model jack takes providers.
 
 **Keyring.** The safe place your computer keeps passwords and keys, such as the Keychain on a Mac.
+
+**KV cache.** A model's working memory of the prompt it has read, kept by its server so it doesn't have to read the same text again.
 
 **llama.cpp.** The open-source program that runs the AI models. Bountiful builds it for your computer.
 
@@ -81,6 +85,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 **Runtime.** Everything that makes an agent itself while it runs: its prompt, its tools, its database, and its models. The session is built on it.
 
 **Session.** A running agent, from the moment you start it to the moment you stop it. The web page, and any other front end, talks to the agent through its session.
+
+**Slot.** The chat server's saved cache, kept in the agent's `data/slots/` folder between restarts.
 
 **Summary.** The agent's written account of the older parts of a conversation, kept up to date by folds.
 

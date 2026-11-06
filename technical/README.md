@@ -8,3 +8,4 @@
 6. [The session](session.md)
 7. [The prompt](prompt.md)
 8. [Memory](memory.md)
+9. [The model servers](model-servers.md)
