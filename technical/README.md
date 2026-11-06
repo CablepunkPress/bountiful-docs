@@ -14,3 +14,4 @@
 12. [Tools](tools.md)
 13. [The web page](web-page.md)
 14. [Releases and versions](releases.md)
+15. [Logs](logs.md)
