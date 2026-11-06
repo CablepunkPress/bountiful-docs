@@ -7,3 +7,4 @@
 5. [The agent folder](agent-folder.md)
 6. [The session](session.md)
 7. [The prompt](prompt.md)
+8. [Memory](memory.md)

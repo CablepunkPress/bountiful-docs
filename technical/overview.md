@@ -44,4 +44,6 @@ Each agent uses three AI models, each one run by its own `llama-server`:
 - **The summary model** writes the summaries that keep a long conversation within what the chat model can hold. Its server listens on port 11444.
 - **The embedding model** turns messages into numbers, so the agent can search its past conversations by meaning. Its server listens on port 11333.
 
+Only one of these servers runs at a time. The chat model's server runs while you talk, and stops whenever the agent needs one of the other two.
+
 A port is a numbered door on your computer that a program listens on. These servers only accept connections from your own computer.

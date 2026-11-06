@@ -10,6 +10,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **API key.** A secret code, like a password, that lets a program use an online service on your account.
 
+**Archive.** Every message an agent and its user have exchanged, kept word for word in its database, which the agent searches with its memory tools.
+
 **Branch.** A line of work in a git repository. Bountiful's releases go to `stable`. New work goes to `main` first.
 
 **Chat model.** The AI model the agent talks with.
@@ -25,6 +27,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 **Custom tools.** Tools the user writes, kept in the agent's `tools/` folder. Also called the tool shed.
 
 **Default tools.** The tools every agent has, such as searching its past conversations. They come with basic-bot. Also called the tool belt.
+
+**Embedding.** A long list of numbers that stands for what a piece of text means. Texts with similar meanings get similar embeddings.
 
 **Embedding model.** An AI model that turns text into a list of numbers, so texts with similar meanings get similar numbers. It lets an agent search by meaning.
 
