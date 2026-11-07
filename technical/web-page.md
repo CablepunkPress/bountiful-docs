@@ -10,7 +10,7 @@ The web page is basic-ui. It's a small web server, made with Flask, that runs on
 2. starts the chat model,
 3. serves the page at `http://localhost:11777` until you press Control-C.
 
-The server listens only on `127.0.0.1`, so the page can only be opened on your own computer. The port is the `flask_port` setting, and the address is `host`.
+The server listens only on `127.0.0.1`, so the page can only be opened on your own computer. The port is the `flask_port` setting.
 
 ## How it's built
 
@@ -57,3 +57,5 @@ A reply is written by a model, so the page treats it as untrusted:
 - Unsafe links, such as `javascript:` links, are refused.
 - The page loads nothing from anywhere else on the internet. Every file it uses comes from basic-ui itself.
 - The page runs no scripts but its own, can't be put inside another website's page, and only sends requests back to its own server.
+- The server only answers requests addressed to `localhost` or `127.0.0.1`. A website can't trick your browser into treating the page as its own.
+- The server refuses a message sent from any other page. A website you visit can't send your agent messages.

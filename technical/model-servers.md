@@ -12,6 +12,10 @@ Every AI model an agent uses runs in its own `llama-server`, llama.cpp's server.
 
 The servers only listen on `127.0.0.1`, the address that means "this computer", so nothing else on your network can reach them.
 
+Each session also makes a new, random API key, and gives it to every server it starts. A server refuses any request without the key, so a web page open in your browser can't use the servers, even though it runs on the same computer. The key is passed to each server privately, so it never appears in the server's logs. Only `/health`, which says whether a server is ready, answers without it.
+
+The servers also run with `--no-slots`. This turns off `GET /slots`, a report of what a server is working on, which can include the conversation. Saving and loading the cache, described under "Slots" below, use a different address and still work.
+
 Only one server runs at a time, because the models don't fit in memory together. The chat server runs while you talk. [Memory](memory.md) explains when the other two run.
 
 ## What the profile sets
