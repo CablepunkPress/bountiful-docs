@@ -26,7 +26,7 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Context window.** How much text a model can hold in mind at once, measured in tokens.
 
-**Custom tools.** Tools the user writes, kept in the agent's `tools/` folder. Also called the tool shed.
+**Custom tools.** Tool groups the user writes, kept in `~/bountiful/custom/tools/`. Also called the tool shed.
 
 **Default tools.** The tools every agent has, such as searching its past conversations. They come with basic-bot. Also called the tool belt.
 

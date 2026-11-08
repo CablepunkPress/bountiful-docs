@@ -22,13 +22,11 @@ If the system's Python has moved to a new version since the venv was made, the v
 
 The first time, it also makes the clone pull-only, so nothing can be pushed from it to GitHub.
 
+Custom tool groups, in `~/bountiful/custom/tools/`, can need Python packages of their own. Each group lists them under `dependencies` in its `tool.json`, and `build.py` installs them into the venv. With no custom tools, this prints nothing.
+
 ## 2. basic-bot's build
 
-`build.py` now runs `python -m basic_bot`, which does the next four steps.
-
-### Agents' tools
-
-Custom tools can need Python packages of their own. Each tool group lists them in its `tool.json`. The build installs them for every registered agent. On a first install there are no agents, so this step prints nothing.
+`build.py` now runs `python -m basic_bot`, which does the next three steps.
 
 ### llama.cpp
 

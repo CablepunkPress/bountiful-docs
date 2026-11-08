@@ -10,14 +10,13 @@ An agent is a folder in the home folder, named by its ID, such as `~/alice`. Eve
     data/           its memory and its logs
     .gitignore      keeps data/ out of git
     config.toml     changes to its settings, only if you make one
-    tools/          your own tool groups, only if you make them
 ```
 
 ## Where the files come from
 
 `bountiful create` writes `agent.json` and copies the rest from basic-bot's templates, in `basic_bot/templates/agent/`. The templates are copied only once, when the agent is made. After that the files are yours, and new versions of Bountiful never overwrite them.
 
-`data/` is made the first time the agent starts. `config.toml` and `tools/` are only there if you make them.
+`data/` is made the first time the agent starts. `config.toml` is only there if you make one.
 
 ## agent.json
 
@@ -66,10 +65,6 @@ The settings and their defaults are listed in basic-bot's `basic_bot/config.py` 
 | `chat_port`, `summary_port`, `embedding_port` | `11555`, `11444`, `11333` | The ports of the three model servers. |
 
 The file is read once, when the agent starts.
-
-## tools/
-
-`tools/` holds your own tool groups, each in a folder of its own. These are the custom tools. A group here only loads if `agent.json` names it. A custom group with the same name as a plugin group takes the plugin's place for this agent.
 
 ## data/
 

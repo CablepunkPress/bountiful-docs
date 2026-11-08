@@ -31,7 +31,7 @@ basic-bot never names extend-a-bot. Instead, it has jacks: fixed places where ot
 
 ## Where everything lives on your computer
 
-- **`~/bountiful`** is the clone of the bountiful repository. Its `.venv` folder holds a private copy of Python with all the parts installed.
+- **`~/bountiful`** is the clone of the bountiful repository. Its `.venv` folder holds a private copy of Python with all the parts installed. Its `custom/` folder is for your own hardware profile and tool groups, and updates never change it.
 - **`~/.bountiful`** holds llama.cpp, the AI models, and Bountiful's records, such as the list of agents.
 - **`~/ID`** is each agent's folder, such as `~/alice`. It holds everything that belongs to that agent, including its memory.
 - **`~/.local/bin/bountiful`** is the `bountiful` command, linked to the one inside `.venv`.

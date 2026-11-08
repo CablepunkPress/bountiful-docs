@@ -8,7 +8,7 @@ A tool is plain Python. The chat model never runs a tool itself. It writes a too
 | --- | --- | --- | --- |
 | Default tools | the tool belt | basic-bot's memory group, `basic_bot/tool_groups/memory/` | every agent |
 | Plugin tools | the tool box | an installed package, such as extend-a-bot's `tool_box/` | agents that have added them |
-| Custom tools | the tool shed | the agent's own `tools/` folder | that agent, once it has added them |
+| Custom tools | the tool shed | `~/bountiful/custom/tools/`, one folder per group | agents that have added them |
 
 The default tools are the memory group, `search_archive` and `recall_message`, explained in [Memory](memory.md). Like every group, it's a folder with a `tool.json`.
 
@@ -43,7 +43,7 @@ wikipedia/
 
 - **`sends`** says what leaves your computer when the tools are used. `bountiful add` shows it before it adds the group.
 - **`keys`** lists the secrets the group needs. `bountiful add` asks for each one.
-- **`dependencies`**, in a custom group, lists Python packages the group needs. The setup installs them.
+- **`dependencies`**, in a custom group, lists Python packages the group needs. `build.py` installs them.
 
 **Each tool** is a `.py` file with two things in it:
 
@@ -53,6 +53,14 @@ wikipedia/
 **Files starting with an underscore**, such as `_wiki.py`, aren't tools. They hold code the group's tools share.
 
 **`instructions.md`** goes into the system prompt of every agent that has the group.
+
+## Listing the groups
+
+`bountiful tools` lists every tool group, in two parts. **Every agent** has the memory group, and any group bountiful names for every agent. **Added per agent** lists the groups an agent can add, each with a line about it and the agents that have added it. For each group it shows where the group comes from, such as `basic-bot`, `extend-a-bot`, or `custom`, and the names of its tools.
+
+`bountiful tools ID` lists every group one agent has, in the same way. A group named in `agent.json` that isn't installed shows as `not installed`. The agent still starts, without it, and its log says so.
+
+The groups every agent has can't be added or removed.
 
 ## Adding a group to an agent
 

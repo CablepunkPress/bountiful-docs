@@ -93,11 +93,10 @@ Install Bountiful? [Y/n]
 Press Return to say yes. After that it doesn't ask anything else. It works through these steps, and prints a heading for each one:
 
 1. **Python environment.** It makes a private space for Bountiful's Python code, in the `.venv` folder inside the clone. It installs Bountiful's parts from GitHub into it.
-2. **Agents' tools.** It installs anything the agents' tools need.
-3. **llama.cpp, the inference server.** It downloads llama.cpp and builds it for your computer. Inference means running an AI model to get an answer. This step takes several minutes and prints many lines.
-4. **Hardware profile.** It looks at your computer and picks the settings that suit it. These settings are called a profile.
-5. **AI models.** It downloads the three AI models every agent needs. One is for chatting. One summarizes older parts of a conversation. One helps an agent search its memory. Their sizes are shown before the download starts.
-6. **The bountiful command.** It installs the `bountiful` command, so you can type `bountiful` in any terminal.
+2. **llama.cpp, the inference server.** It downloads llama.cpp and builds it for your computer. Inference means running an AI model to get an answer. This step takes several minutes and prints many lines.
+3. **Hardware profile.** It looks at your computer and picks the settings that suit it. These settings are called a profile.
+4. **AI models.** It downloads the three AI models every agent needs. One is for chatting. One summarizes older parts of a conversation. One helps an agent search its memory. Their sizes are shown before the download starts.
+5. **The bountiful command.** It installs the `bountiful` command, so you can type `bountiful` in any terminal.
 
 On a slow connection, the downloads can take hours. You can leave the setup running on its own.
 
