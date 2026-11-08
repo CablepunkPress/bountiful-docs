@@ -12,7 +12,7 @@ A tool is plain Python. The chat model never runs a tool itself. It writes a too
 
 The default tools are the memory group, `search_archive` and `recall_message`, explained in [Memory](memory.md). Like every group, it's a folder with a `tool.json`.
 
-basic-bot runs every tool, but only the default tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_box` entry point, and basic-bot finds it there.
+basic-bot runs every tool, but only the default tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_groups` entry point, and basic-bot finds it there.
 
 ## Tool groups
 
