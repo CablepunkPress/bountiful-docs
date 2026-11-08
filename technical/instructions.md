@@ -35,9 +35,9 @@ They're read where basic-bot is installed, so an update to them reaches every ag
 
 ### Tool results and honesty about lookups
 
-**What it says.** Tool results come from the system, not from the user. The agent only says it looked something up when it called a tool for it this turn. Whether an earlier reply used a tool is in that reply's annotation. It never says it will check something, or that it has, unless it calls the tool this turn.
+**What it says.** Tool results come from the system, not from the user. A result lasts only for the turn the tool was called in; in later turns the annotation shows only that a tool was used, so to see a result again, the agent calls the tool again. The agent only says it looked something up when it called a tool for it this turn. Whether an earlier reply used a tool is in that reply's annotation. It never says it will check something, or that it has, unless it calls the tool this turn.
 
-**Why.** Models claim lookups they never made.
+**Why.** The model can't tell that a past result is gone. In a test, asked for the date of a message it had looked up the turn before, the agent treated its own earlier reply as the tool's result, decided the tool had never given a date, and asked the user instead of looking again. Models also claim lookups they never made.
 
 ### What it knows, and when to check
 
