@@ -25,7 +25,7 @@ The profile, chosen by the setup, says how to start each server: which model fil
 - **Context size**, 65,536 tokens: the most the chat model can hold in mind at once, the whole prompt and the reply together.
 - **Reply length**, at most 4,096 tokens.
 - **The KV cache**, kept in 8 bits. The KV cache is the model's working memory of the prompt it has read. Keeping it in 8 bits instead of 16 halves the memory it takes.
-- **Reasoning**, with a budget of 1,024 tokens. When the model has reasoned that long, the server tells it to answer.
+- **Reasoning**, with a budget of 1,024 tokens. When the model has reasoned that long, the server ends its reasoning and has it act: call a tool if it needs one, or answer.
 - **The reasoning prefill**, the opening words of its reasoning on every turn.
 - **Sampling**: temperature 1.0, top-p 0.95, top-k 64, as Google recommends for Gemma 4. These settings decide how the model picks each next word.
 
