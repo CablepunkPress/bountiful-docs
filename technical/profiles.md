@@ -30,6 +30,19 @@ A computer with more memory than a profile needs uses that profile, and the setu
 
 The choice is written to `~/.bountiful/machine.toml`. Each time an agent starts, it reads the profile named there.
 
+## A profile of your own
+
+You can use a profile of your own instead of Bountiful's. Put it in `~/bountiful/custom/profile/`, then run `python3 build.py`. The build uses it in place of Bountiful's, and downloads the models it names.
+
+- **Only one profile may be there.** With two or more, the build stops and names them.
+- **It always wins.** The build doesn't compare its memory with the computer's. That's your call.
+- **It must be for this computer's backend.** llama.cpp is built for Metal on a Mac and Vulkan on GNU/Linux, so a profile for the other backend can't run. The build says so and stops.
+- **It's checked like Bountiful's**, when the build chooses it and each time an agent starts.
+
+`~/.bountiful/machine.toml` records your profile's name and where its file is. Updates never touch `custom/`, so your profile stays in place.
+
+After you change your profile, run `python3 build.py` again so the build checks it and downloads any new models. To go back to Bountiful's profiles, take your profile out of the folder and run `python3 build.py` again. If you take it out without running the build, agents won't start, and the message says to run the build.
+
 ## Where the profiles live
 
 The profiles come with basic-bot, in `basic_bot/profiles/`, as TOML files: `metal_32gb.toml` and `vulkan_12gb.toml`. Each starts with a `[needs]` table that says what the computer must have:

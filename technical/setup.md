@@ -47,6 +47,8 @@ The build works out what kind of computer this is:
 
 Profiles come with basic-bot, as files in `basic_bot/profiles/`. Each one says what kind of computer it needs. The build picks the largest profile for this backend that fits the memory, and writes its choice to `~/.bountiful/machine.toml`. Every agent on the computer uses that profile.
 
+If `~/bountiful/custom/profile/` holds a profile of your own, the build uses it instead, as [Profiles](profiles.md) explains.
+
 ### AI models
 
 The build downloads the models the profile names into `~/.bountiful/models`: the embedding model, the summary model, and the chat model.
