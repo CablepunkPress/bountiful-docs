@@ -16,6 +16,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Branch.** A line of work in a git repository. Bountiful's releases go to `stable`. New work goes to `main` first.
 
+**Built-in tools.** The tool groups Bountiful gives every agent. They can't be added or removed.
+
 **Chat model.** The AI model the agent talks with.
 
 **Chat template.** The part of a model that lays out its prompt in the form the model was trained on, including where the tools go.
@@ -26,9 +28,7 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Context window.** How much text a model can hold in mind at once, measured in tokens.
 
-**Custom tools.** Tool groups the user writes, kept in `~/bountiful/custom/tools/`. Also called the tool shed.
-
-**Default tools.** The tools every agent has, such as searching its past conversations. They come with basic-bot. Also called the tool belt.
+**Custom tools.** Plugin tools the user writes, kept in `~/bountiful/custom/tools/`.
 
 **Drafter.** A small, fast helper that guesses the chat model's next few tokens, so the chat model can check several at once and answer faster.
 
@@ -58,6 +58,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **llama-server.** llama.cpp's server. Bountiful runs one for each of the three models.
 
+**Memory tools.** The tools for searching an agent's past conversations, `search_archive` and `recall_message`. They come with basic-bot, so every agent has them.
+
 **Metal.** Apple's way for programs to use a Mac's graphics chip. llama.cpp uses it on a Mac.
 
 **Name.** What an agent is called, such as `Alice`. It can have capitals and spaces.
@@ -66,7 +68,7 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Pin.** Naming the exact version of a part that Bountiful uses.
 
-**Plugin tools.** Tools that come in an installed package, such as extend-a-bot's Wikipedia and Brave Search. Also called the tool box.
+**Plugin tools.** Tool groups added to an agent and removed from it, one agent at a time. They come from extend-a-bot, such as Wikipedia and Brave Search, or from the user's custom tools.
 
 **Port.** A numbered door on a computer that a program listens on.
 
@@ -108,6 +110,6 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **venv.** A virtual environment: a private copy of Python with its own installed packages. Bountiful's is the `.venv` folder in the clone.
 
-**Warming.** Sending the conversation to the chat server ahead of time, so the next message is answered sooner.
-
 **Vulkan.** A standard way for programs to use a graphics card. llama.cpp uses it on GNU/Linux.
+
+**Warming.** Sending the conversation to the chat server ahead of time, so the next message is answered sooner.

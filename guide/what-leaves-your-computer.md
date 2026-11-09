@@ -12,7 +12,7 @@ The web page you chat on is served by your own computer, and only your computer 
 
 What a tool sends depends on the tool:
 
-- **The default tools**, which search an agent's past conversations, send nothing anywhere.
+- **The memory tools**, which search an agent's past conversations, send nothing anywhere.
 - **wikipedia** sends what the agent searches for, and the titles of the articles it reads, to Wikipedia. Its requests name Bountiful as the program making them, not you. No account is needed.
 - **brave** sends what the agent searches for to Brave Search, under your Brave Search API key. Brave charges for searches beyond its monthly free credit.
 

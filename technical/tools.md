@@ -4,19 +4,23 @@ A tool is plain Python. The chat model never runs a tool itself. It writes a too
 
 ## The three kinds
 
-| Kind | Also called | Where it lives | Who has it |
-| --- | --- | --- | --- |
-| Default tools | the tool belt | basic-bot's memory group, `basic_bot/tool_groups/memory/` | every agent |
-| Plugin tools | the tool box | an installed package, such as extend-a-bot's `tool_box/` | agents that have added them |
-| Custom tools | the tool shed | `~/bountiful/custom/tools/`, one folder per group | agents that have added them |
+| Kind | Where it comes from | Who has it |
+| --- | --- | --- |
+| Memory tools | basic-bot's memory group, `basic_bot/tool_groups/memory/` | every agent |
+| Built-in tools | the groups Bountiful gives every agent, named in the `bountiful` command | every agent |
+| Plugin tools | an installed package, such as extend-a-bot's `tool_box/`, or `~/bountiful/custom/tools/` | agents that have added them |
 
-The default tools are the memory group, `search_archive` and `recall_message`, explained in [Memory](memory.md). Like every group, it's a folder with a `tool.json`.
+The memory tools are the memory group, `search_archive` and `recall_message`, explained in [Memory](memory.md). Like every group, it's a folder with a `tool.json`.
 
-basic-bot runs every tool, but only the default tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_groups` entry point, and basic-bot finds it there.
+Built-in tools can't be added or removed. Bountiful has none yet.
+
+Plugin tools are added and removed one agent at a time. Plugins you write yourself are custom tools, and live in `~/bountiful/custom/tools/`.
+
+basic-bot runs every tool, but only the memory tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_groups` entry point, and basic-bot finds it there.
 
 ## Tool groups
 
-Plugin and custom tools come in groups. A group is a folder:
+Built-in and plugin tools come in groups too. A group is a folder:
 
 ```
 wikipedia/
@@ -56,15 +60,15 @@ wikipedia/
 
 ## Listing the groups
 
-`bountiful tools` lists every tool group, in two parts. **Every agent** has the memory group, and any group bountiful names for every agent. **Added per agent** lists the groups an agent can add, each with a line about it and the agents that have added it. For each group it shows where the group comes from, such as `basic-bot`, `extend-a-bot`, or `custom`, and the names of its tools.
+`bountiful tools` lists every tool group, in two parts. **Built-in** lists the groups every agent has: the memory group, and the built-in groups. **Plugins** lists the groups an agent can add, each with a line about it and the agents that have added it. For each group it shows where the group comes from, such as `basic-bot`, `extend-a-bot`, or `custom`, and the names of its tools.
 
 `bountiful tools ID` lists every group one agent has, in the same way. A group named in `agent.json` that isn't installed shows as `not installed`. The agent still starts, without it, and its log says so.
 
-The groups every agent has can't be added or removed.
+The memory group and the built-in groups can't be added or removed.
 
 ## Adding a group to an agent
 
-A plugin or custom group only loads for an agent that has added it. `bountiful add GROUP ID` adds it:
+A plugin group only loads for an agent that has added it. `bountiful add GROUP ID` adds it:
 
 1. It shows what the group sends.
 2. It asks for each key, and stores it in the keyring.
@@ -72,7 +76,7 @@ A plugin or custom group only loads for an agent that has added it. `bountiful a
 
 The agent's settings for the group live in `agent.json` from then on, where you can change them. `bountiful remove GROUP ID` removes the group's settings and deletes its keys.
 
-A custom group with the same name as a plugin group takes the plugin's place for that agent.
+A custom group with the same name as an installed group takes its place.
 
 ## Settings and keys
 

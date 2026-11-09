@@ -36,7 +36,7 @@ An agent is a folder in the home folder, named by its ID, such as `~/alice`. Eve
 - **`id`** never changes. It names the folder, the database, and the agent's keys in the keyring.
 - **`name`** is what the agent is called. You can change it by hand.
 - **`description`** is a line about the agent.
-- **`tools`** lists the tool groups the agent has added, each with its settings. `bountiful add` and `bountiful remove` write this part. It's left out when the agent has only the default tools.
+- **`tools`** lists the plugin tool groups the agent has added, each with its settings. `bountiful add` and `bountiful remove` write this part. It's left out when the agent has no plugins.
 
 ## persona.md
 
