@@ -2,7 +2,7 @@
 
 A session is a running agent, from the moment you start it to the moment you stop it. It's the one way a front end, such as the web page, talks to the agent. A front end never touches the models, the database, or the servers itself. It asks the session.
 
-The session is in basic-bot's `basic_bot/session.py`. basic-ui's web page uses it, and so does `bountiful chat ID` in the terminal. Both show the same agent, because both go through the session.
+The session is in basic-bot's `basic_bot/session.py`. The `bountiful` command opens it and hands it to the front end: basic-ui's web page for `bountiful ID`, and the terminal for `bountiful chat ID`. Both show the same agent, because both go through the session.
 
 ## What a front end does with it
 

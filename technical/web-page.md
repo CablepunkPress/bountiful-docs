@@ -4,11 +4,10 @@ The web page is basic-ui. It's a small web server, made with Flask, that runs on
 
 ## How it starts
 
-`bountiful ID` calls basic-ui's `launch`, in `basic_ui/launch.py`. It:
+`bountiful ID` opens the agent's session and hands it to basic-ui's `launch`, in `basic_ui/launch.py`. It:
 
-1. opens the agent's session,
-2. starts the chat model,
-3. serves the page at `http://localhost:11777` until you press Control-C.
+1. starts the chat model,
+2. serves the page at `http://localhost:11777` until you press Control-C.
 
 The server listens only on `127.0.0.1`, so the page can only be opened on your own computer. The port is the `flask_port` setting.
 
