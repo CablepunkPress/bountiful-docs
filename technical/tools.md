@@ -60,9 +60,11 @@ wikipedia/
 
 ## Listing the groups
 
-`bountiful tools` lists every tool group, in two parts. **Built-in** lists the groups every agent has: the memory group, and the built-in groups. **Plugins** lists the groups an agent can add, each with a line about it and the agents that have added it. For each group it shows where the group comes from, such as `basic-bot`, `extend-a-bot`, or `custom`, and the names of its tools.
+`bountiful tools` lists the plugins any agent can add: extend-a-bot's and your custom ones. For each it shows where it comes from, `extend-a-bot` or `custom`, the names of its tools, a line about it, and the agents that have added it.
 
-`bountiful tools ID` lists every group one agent has, in the same way. A group named in `agent.json` that isn't installed shows as `not installed`. The agent still starts, without it, and its log says so.
+`bountiful tools ID` lists every tool one agent has, in three parts: **Memory**, **Built-in**, and **Plugins**, each with where it comes from. A plugin named in `agent.json` that isn't installed shows as `not installed`. The agent still starts, without it, and its log says so.
+
+extend-a-bot is the plugin manager. It finds the plugins, and `bountiful add` and `bountiful remove` use it to add and remove them.
 
 The memory group and the built-in groups can't be added or removed.
 

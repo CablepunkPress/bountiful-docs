@@ -2,16 +2,16 @@
 
 Tools let an agent do more than talk. With a tool, an agent can look something up instead of answering from what it already knows.
 
-Every agent has tools for searching its own past conversations. You can add more, in groups. A tool group is a set of tools that work together.
+Every agent has tools for searching its own past conversations. You can add more, in groups called plugins. A tool group is a set of tools that work together.
 
 ## The tool groups
 
-Bountiful comes with two tool groups:
+Bountiful comes with two plugins:
 
 - **wikipedia** lets the agent search Wikipedia and read its articles. It needs no account.
 - **brave** lets the agent search the web with Brave Search, for news and things Wikipedia doesn't cover. It needs a Brave Search API key.
 
-To see the tool groups, and which agents use each one, type:
+To see the plugins, and which agents use each one, type:
 
 ```bash
 bountiful tools
@@ -51,11 +51,13 @@ Paste the key and press Return. The key stays hidden while you paste it. Bountif
 
 To replace the key later, run `bountiful add brave alice` again.
 
-## See an agent's tool groups
+## See an agent's tools
 
 ```bash
 bountiful tools alice
 ```
+
+This lists every tool the agent has: its memory tools, the tools every agent has, and the plugins added to it.
 
 ## Remove a tool group
 

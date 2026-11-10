@@ -9,10 +9,10 @@ Usage:
     bountiful agents          the agents this machine knows
     bountiful forget ID       unregister an agent; its folder is untouched
     bountiful register ID     register an agent's folder in home
-    bountiful tools           the tool groups available, and which agents use each
-    bountiful tools ID        an agent's tool groups
-    bountiful add GROUP ID    add a tool group to an agent
-    bountiful remove GROUP ID remove a tool group, with its settings and keys
+    bountiful tools           the plugin tools available, and which agents use each
+    bountiful tools ID        an agent's tools, and where each comes from
+    bountiful add GROUP ID    add a plugin tool to an agent
+    bountiful remove GROUP ID remove a plugin tool and its settings and keys
     bountiful version         show the installed version
     bountiful update          check for a new version and install it
 ```
