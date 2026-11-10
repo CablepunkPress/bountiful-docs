@@ -1,0 +1,6 @@
+{
+    "name": "docs",
+    "description": "Read Bountiful's documentation",
+    "sends": "Nothing. These tools only read the docs installed on your computer.",
+    "keys": []
+}

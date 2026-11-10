@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bountiful-docs"
+dynamic = ["version"]
+description = "The documentation for Bountiful, and the tools agents read it with"
+requires-python = ">=3.14"
+license = "MIT AND CC-BY-4.0"
+license-files = ["LICENSE", "LICENSE-DOCS"]
+dependencies = []
+
+[project.entry-points."basic_bot.tool_groups"]
+bountiful_docs = "bountiful_docs:TOOL_GROUPS"
+
+[tool.pyright]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+
+[tool.setuptools.dynamic]
+version = {attr = "bountiful_docs.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["bountiful_docs*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"*" = ["*.md", "*.json"]

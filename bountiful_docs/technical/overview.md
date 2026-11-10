@@ -16,7 +16,7 @@ Bountiful is made of several parts. Each part is its own repository on GitHub, a
 
 **bountiful** is the hub. It holds the setup, `build.py`, and the `bountiful` command. It also pins the other parts: it names exactly which version of each one Bountiful uses. A Bountiful release is one set of versions that work together.
 
-**bountiful-docs** is this documentation. It will join the pinned parts, so every agent can read the docs for the version it runs.
+**bountiful-docs** is this documentation. It is one of the pinned parts, and holds the docs tools, so every agent can read the docs for the version it runs.
 
 ## Who knows about whom
 
@@ -25,9 +25,10 @@ The parts depend on each other in one direction only:
 - basic-bot knows about none of the others.
 - basic-ui uses basic-bot.
 - extend-a-bot uses basic-bot.
+- bountiful-docs uses none of the others.
 - bountiful uses all of them.
 
-basic-bot never names extend-a-bot. Instead, it has jacks: fixed places where other parts plug in. extend-a-bot plugs its tools into basic-bot's tools jack.
+basic-bot never names extend-a-bot. Instead, it has jacks: fixed places where other parts plug in. extend-a-bot and bountiful-docs plug their tools into basic-bot's tools jack.
 
 ## Where everything lives on your computer
 

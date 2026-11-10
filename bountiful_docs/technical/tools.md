@@ -12,11 +12,11 @@ A tool is plain Python. The chat model never runs a tool itself. It writes a too
 
 The memory tools are the memory group, `search_archive` and `recall_message`, explained in [Memory](memory.md). Like every group, it's a folder with a `tool.json`.
 
-Built-in tools can't be added or removed. Bountiful has none yet.
+Bountiful has one built-in group, docs, which comes with bountiful-docs. Its two tools read these docs: `list_docs` lists every page with its title, and `read_doc` reads one page whole. Built-in tools can't be added or removed.
 
 Plugin tools are added and removed one agent at a time. Plugins you write yourself are custom tools, and live in `~/bountiful/custom/tools/`.
 
-basic-bot runs every tool, but only the memory tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_groups` entry point, and basic-bot finds it there.
+basic-bot runs every tool, but only the memory tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_groups` entry point, and basic-bot finds it there. bountiful-docs plugs its docs group into the same jack.
 
 ## Tool groups
 
@@ -99,4 +99,4 @@ basic-bot keeps a record of every tool call in a turn, saved with the agent's re
 
 A tool names its sources with a `sources` list in its result. basic-bot moves them into the record and takes them out of the result before the model reads it. The reply's annotation shows the record on later turns, so the model knows which of its past answers came from a lookup.
 
-The Wikipedia and Brave results also end with a `cite` line, which tells the model to name its source in its reply.
+The Wikipedia, Brave, and docs results also end with a `cite` line, which tells the model to name its source in its reply. A docs result names its page in a `source` field instead of a `sources` list, because the page has no web address, and the call's record already shows which page was read.

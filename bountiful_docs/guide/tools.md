@@ -2,7 +2,7 @@
 
 Tools let an agent do more than talk. With a tool, an agent can look something up instead of answering from what it already knows.
 
-Every agent has tools for searching its own past conversations. You can add more, in groups called plugins. A tool group is a set of tools that work together.
+Every agent has tools for searching its own past conversations, and tools for reading these docs, so you can ask an agent how Bountiful works. You can add more, in groups called plugins. A tool group is a set of tools that work together.
 
 ## The tool groups
 
