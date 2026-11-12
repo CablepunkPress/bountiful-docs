@@ -89,6 +89,8 @@ They're read where basic-bot is installed, so an update to them reaches every ag
 
 **Why.** The user only sees the reply. Every draft in the reasoning is time the user waits.
 
-## The tool groups' instructions
+## Guidance for one tool
 
-A tool group can carry its own `instructions.md`, which goes in the system prompt right after these, for agents that have that group. They hold only what's particular to the group, such as Wikipedia's "search for the exact title, then read". The general rules stay in `capabilities.md`, so the two can't disagree. [Tools](tools.md) explains tool groups.
+**What it says.** Guidance for a single tool isn't in the instructions. What the model needs before it calls a tool is in the tool's description, such as Wikipedia's "search first for an article's exact title, then read it". What it needs after a call is in the tool's result, such as the line telling it to name its source. Only the rules for every tool are in `capabilities.md`, so the two can't disagree. [Tools](tools.md) explains tool groups.
+
+**Why.** The tool definitions are the last part of the system prompt the model reads, and a result is the last thing it reads before it answers. In a test, a rule given only earlier in the system prompt was followed in the model's reasoning but left out of its reply.

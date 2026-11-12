@@ -8,10 +8,9 @@ The whole prompt, in order:
 The system prompt
     1. The persona
     2. The instructions
-    3. The tool groups' instructions
-    4. The context
-    5. The tools list
-    6. The memory
+    3. The context
+    4. The tools list
+    5. The memory
 The tool definitions, added by the chat template
 The transcript
     The conversation since the summary
@@ -24,12 +23,11 @@ The system prompt is made of these sections, in this order:
 
 1. **The persona**, from the agent's `persona.md`, with `{{ name }}` replaced by the agent's name.
 2. **The instructions**, from basic-bot's `basic_bot/instructions/`. `capabilities.md` explains the agent's memory and how to use its tools. `output.md` explains how to write its replies.
-3. **The tool groups' instructions**, from each added group that has an `instructions.md`, such as Wikipedia's.
-4. **The context**, from the agent's `context/` folder, under a `# CONTEXT` heading. It's left out when the folder has no files.
-5. **The tools**, under a `# TOOLS` heading: a line naming every tool the agent has.
-6. **The memory**, under a `# MEMORY` heading: the summary of the older part of the conversation, and which messages it covers. Until the first fold, it says that nothing has been summarized yet.
+3. **The context**, from the agent's `context/` folder, under a `# CONTEXT` heading. It's left out when the folder has no files.
+4. **The tools**, under a `# TOOLS` heading: a line naming every tool the agent has.
+5. **The memory**, under a `# MEMORY` heading: the summary of the older part of the conversation, and which messages it covers. Until the first fold, it says that nothing has been summarized yet.
 
-The first four sections are put together once, when the session opens. The memory section changes only when there's a fold.
+The first three sections are put together once, when the session opens. The memory section changes only when there's a fold.
 
 ## The transcript
 
@@ -59,7 +57,7 @@ Annotations are added each time the prompt is built. They're never stored in the
 
 ## The tools
 
-Section 5 of the system prompt, `# TOOLS`, is only a quick list of the tools' names. The full definitions come another way.
+Section 4 of the system prompt, `# TOOLS`, is only a quick list of the tools' names. The full definitions come another way.
 
 basic-bot sends each tool's name, description, and inputs to the chat model's server, separately from the system prompt. The server writes them into the prompt, using the model's chat template. The chat template is a part of the model that decides how the prompt is laid out, in the form the model was trained on.
 

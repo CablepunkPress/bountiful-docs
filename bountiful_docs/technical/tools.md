@@ -29,7 +29,6 @@ wikipedia/
     read_wikipedia.py     another tool
     _wiki.py              code the group's tools share
     settings.toml         the settings an agent starts with
-    instructions.md       how to use the group, for the system prompt
 ```
 
 **`tool.json`** describes the group for people. `bountiful tools` and `bountiful add` show it:
@@ -56,7 +55,7 @@ wikipedia/
 
 **Files starting with an underscore**, such as `_wiki.py`, aren't tools. They hold code the group's tools share.
 
-**`instructions.md`** goes into the system prompt of every agent that has the group.
+A group has no instructions of its own in the system prompt. What the model needs to know before it calls a tool is in the tool's `description`. What it needs after a call is in the result, such as the `cite` line. The rules for every tool are in basic-bot's `capabilities.md`, explained in [The instructions](instructions.md).
 
 ## Listing the groups
 
