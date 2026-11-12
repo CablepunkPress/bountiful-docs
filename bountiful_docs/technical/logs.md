@@ -34,7 +34,7 @@ When the log reaches 5 MB, it's renamed `ID.log.1`, and a new one starts. The th
 
 ### The model's reasoning
 
-The agent log can also record the model's reasoning, word for word. It's off by default. To turn it on, add this line to the agent's `config.toml`, and start the agent again:
+The agent log can also record the model's reasoning and its reply, word for word, with why each reply ended: `stop` when the model finished, `tool_calls` when it called a tool, and `length` when it ran past `max_tokens`. It's off by default. To turn it on, add this line to the agent's `config.toml`, and start the agent again:
 
 ```toml
 log_reasoning = true

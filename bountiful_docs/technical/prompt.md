@@ -53,7 +53,7 @@ An agent's reply also says which tools it used to write it, and which sites thei
 
 The annotation on your new message is how the model knows the current time.
 
-Annotations are added each time the prompt is built. They're never stored in the database, and the agent's replies are cleaned of any that the model writes.
+Annotations are added each time the prompt is built. They're never stored in the database, and the agent's replies are cleaned of any that the model writes. Any other note the model writes in the same form, `<!-- … -->`, is taken out of its reply too, except inside a block of code.
 
 ## The tools
 
@@ -71,9 +71,13 @@ Only the final reply is saved. The tool calls and their results last only for th
 
 After 8 rounds of tool calls, set by `max_tool_rounds`, further calls aren't run. The model is told to answer with what it has found.
 
+Sometimes the model plans to call a tool, then answers without calling it, and makes up what the tool would have found. basic-bot watches for this at the start of a turn. When the model's reasoning names one of its tools and the reply makes no call and doesn't name that tool, basic-bot sets the reply aside and asks again. It gives the model its own reasoning back, with one more line in its own voice: that it planned to call the tool and hasn't yet, and will call it now if it still needs it. This happens at most once a turn. It costs a second or two, and only on the turns that need it.
+
+A reply can also run past the longest a reply may be, set by `max_tokens`. That only happens when something has gone wrong, such as the model repeating itself. The reply is then saved cut short, at 4,000 characters, with a note saying so, so it doesn't fill the conversation the agent rereads every turn.
+
 ## The reasoning prefill
 
-The chat model's profile gives a prefill: the opening words of its reasoning. basic-bot starts the model's reasoning with those words on every turn, so it begins by asking itself whether anything in the message should be checked with a tool.
+The chat model's profile gives a prefill: the opening words of its reasoning. basic-bot starts the model's reasoning with those words on every turn, so it begins by planning its steps, with any tool call first, and by asking itself whether anything in the message should be checked with a tool.
 
 ## Why the order
 
