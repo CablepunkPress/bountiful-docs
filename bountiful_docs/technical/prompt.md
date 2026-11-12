@@ -22,7 +22,7 @@ The transcript
 The system prompt is made of these sections, in this order:
 
 1. **The persona**, from the agent's `persona.md`, with `{{ name }}` replaced by the agent's name.
-2. **The instructions**, from basic-bot's `basic_bot/instructions/`. `capabilities.md` explains the agent's memory and how to use its tools. `output.md` explains how to write its replies.
+2. **The instructions**, from basic-bot's `basic_bot/instructions/`. `capabilities.md` explains the agent's memory and how to use its tools. `identity.md` says what the agent is. `output.md` explains how to write its replies.
 3. **The context**, from the agent's `context/` folder, under a `# CONTEXT` heading. It's left out when the folder has no files.
 4. **The tools**, under a `# TOOLS` heading: a line naming every tool the agent has.
 5. **The memory**, under a `# MEMORY` heading: the summary of the older part of the conversation, and which messages it covers. Until the first fold, it says that nothing has been summarized yet.

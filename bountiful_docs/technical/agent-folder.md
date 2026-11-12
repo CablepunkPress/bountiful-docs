@@ -40,7 +40,7 @@ An agent is a folder in the home folder, named by its ID, such as `~/alice`. Eve
 
 ## persona.md
 
-The persona is the first part of the agent's prompt. Where it says `{{ name }}`, the agent's name is automatically added from its `agent.json`. You can rewrite the agent's persona however you like. Changes take effect the next time you start the agent.
+The persona is the first part of the agent's prompt. Where it says `{{ name }}`, the agent's name is automatically added from its `agent.json`. A new agent's persona is short: its name and a line about its personality. What every agent needs to know, such as what it is and how to use its memory and tools, is in [the instructions](instructions.md), so rewriting the persona never removes it. You can rewrite the agent's persona however you like. Keep it to personality: a small model can follow a rule such as "point out every inconsistency" too eagerly, and argue with you over nothing. Changes take effect the next time you start the agent.
 
 ## context/
 
