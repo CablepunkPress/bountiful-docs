@@ -18,9 +18,9 @@ They're read where basic-bot is installed, so an update to them reaches every ag
 
 ### Annotations
 
-**What it says.** What each part of a message's annotation means: `seq`, `created_at`, and for a reply, the tools it used. The user doesn't type or see annotations, so the agent starts each reply with its first word of content, not an annotation. If the user asks what an annotation says, it tells them.
+**What it says.** The agent begins each reply with its first word of content. The system adds an annotation to the start of every message, the agent's replies included, after it is written, and the agent never writes one itself. Then, what each part of an annotation means: `seq`, `created_at`, and for a reply, the tools it used. The user doesn't type or see annotations. If the user asks what an annotation says, the agent tells them.
 
-**Why.** The annotations are only useful if the model can read them. Without the last part, a model can copy the pattern and start its own replies with an annotation.
+**Why.** The annotations are only useful if the model can read them. Every message in the prompt starts with one, so a model tends to copy the pattern and start its own replies with an annotation, filled in with a made-up time. Saying first who writes them, and that the agent never does, works against that. basic-bot also removes any the model writes, so they're never saved.
 
 ### The time
 
