@@ -30,8 +30,12 @@ The agent remembers your conversations, even after you stop it and start it agai
 
 When a conversation gets long, the page sometimes says "Updating memory…" after a reply. The agent is writing a summary of the older part of the conversation. When the page says "Memory updated.", you can carry on.
 
+## Interrupt the agent
+
+If the agent is taking too long over a reply, open the drawer with the menu button at the top right and press **Interrupt Agent**. The agent stops at once. Your message is marked "Not sent" and goes back in the message box, so you can change it or send it again. The agent doesn't remember the interrupted turn.
+
 ## Stop the agent
 
-Go back to the terminal and press Control-C.
+Open the drawer and press **End Session**, or go back to the terminal and press Control-C. Either one stops the agent the same way.
 
-Closing the browser tab doesn't stop the agent. It keeps running until you press Control-C or close the terminal window.
+Closing the browser tab doesn't stop the agent. It keeps running until you end the session, press Control-C, or close the terminal window.

@@ -21,12 +21,21 @@ with Session.open(agent_path, data_dir) as session:
 - **`send`** answers a message. It returns the reply as soon as the reply is written and the turn is saved.
 - **`update_memory`** runs a fold. A front end calls it when a reply says one is due, and shows "Updating memory…" while it runs.
 - **`close`** stops every server the session started. The `with` block calls it when the front end stops, however it stops.
+- **`interrupt`** stops the turn in progress. A front end can call it from another thread while `send` is still answering.
 
 A front end can also ask for the recent messages with **`history`**, and for the settings to show with **`controls`**. It changes those settings with **`select_model`**, **`set_reasoning`**, and **`set_effort`**.
 
 ## One thing at a time
 
 A session does one thing at a time. If a front end sends a message while the agent is still answering, or still updating its memory, the session says it's busy.
+
+## Interrupting a turn
+
+`interrupt` cancels the whole turn, at any point from when the message arrives until the turn is saved: while the model reasons or writes, between tool calls, or after the reply is finished but before it's saved. `send` then raises `SessionInterrupted`, and nothing of the turn is saved, not even your message. The agent never learns the turn happened.
+
+To stop the model at once, the session closes the connection to the chat server. llama-server notices the closed connection and stops generating, and the server is ready for the next message. A tool that's already running finishes first, and the turn stops after it.
+
+A fold is never interrupted. If a fold is still due from an earlier turn, it runs at the start of the next one; an interrupt during it waits until the fold is done, then cancels the turn before the model is asked anything.
 
 ## Memory is always up to date
 
@@ -46,7 +55,7 @@ Warming runs in the background, so you can send a message right away. If you do,
 
 ## Stopping
 
-Control-C, closing the terminal window, logging out, and an ordinary `kill` all end in `close`, so the model servers are stopped. If the program is forced to quit, each server has a watchdog, a small program that stops its server when the program that started it is gone.
+Control-C, the web page's End Session button, closing the terminal window, logging out, and an ordinary `kill` all end in `close`, so the model servers are stopped. If the program is forced to quit, each server has a watchdog, a small program that stops its server when the program that started it is gone.
 
 ## The runtime
 

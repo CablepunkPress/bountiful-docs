@@ -38,6 +38,14 @@ The message box stays greyed out until the last step is done. Each response says
 
 If something goes wrong, the error shows in the conversation as a message of its own, and the message box turns back on. The terminal shows the details.
 
+## Interrupt Agent and End Session
+
+The drawer has two buttons below the settings.
+
+**Interrupt Agent** sends `POST /interrupt`, which calls the session's `interrupt`. The waiting `POST /reply` then comes back the same way a message that failed to send does: your message is marked "Not sent", its text goes back in the message box, and a message says the agent was interrupted. Nothing of the turn is saved. The button does nothing when no turn is running.
+
+**End Session** sends `POST /end`. The page says the session has ended, and then the program stops itself exactly as Control-C does, so the session closes and the model servers stop the same way.
+
 ## Replies
 
 The agent's replies are written in Markdown. basic-ui turns them into HTML with markdown-it-py, which handles headings, lists, tables, and links. Links open in a new tab.
