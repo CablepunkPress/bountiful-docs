@@ -46,7 +46,7 @@ The page hears this through `GET /events`, a connection it keeps open from the m
 
 ## Interrupt Agent and End Session
 
-The drawer has two buttons below the settings.
+The drawer has two buttons, Interrupt Agent and End Session. Above them are the model, Deep Reasoning, and effort settings, but only when the profile has more than one chat model to choose from. With one, as in Bountiful's profiles, there's nothing to choose, so they're left out, and the model always reasons.
 
 **Interrupt Agent** sends `POST /interrupt`, which calls the session's `interrupt`. The waiting `POST /reply` then comes back the same way a message that failed to send does: your message is marked "Not sent", its text goes back in the message box, and a message says the agent was interrupted. Nothing of the turn is saved. The button does nothing when no turn is running.
 

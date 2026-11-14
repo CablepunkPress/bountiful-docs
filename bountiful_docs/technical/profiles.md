@@ -68,6 +68,8 @@ The chat model's entry has tables of its own:
 
 [The model servers](model-servers.md) explains what these settings do.
 
+A profile can list more than one chat model. Then the web page's drawer lets you choose between them, and shows each model's reasoning and effort settings. Bountiful's profiles list one, so the drawer shows none of these.
+
 ## How the two differ
 
 Both profiles use the same chat model and the same embedding model. They differ where the hardware does:
