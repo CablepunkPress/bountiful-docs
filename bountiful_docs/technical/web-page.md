@@ -38,6 +38,12 @@ The message box stays greyed out until the last step is done. Each response says
 
 If something goes wrong, the error shows in the conversation as a message of its own, and the message box turns back on. The terminal shows the details.
 
+## What the agent is doing
+
+While the agent answers, the "Thinking…" line shows what it's doing. When it calls a tool, the line changes to that tool's narration, such as "I'm checking Wikipedia…", and it changes again with each tool. The reply then takes the line's place.
+
+The page hears this through `GET /events`, a connection it keeps open from the moment it loads (Server-Sent Events, which browsers support on their own). The server sends each event from the session as it happens, and a short ping every 15 seconds, so it notices when the page has gone.
+
 ## Interrupt Agent and End Session
 
 The drawer has two buttons below the settings.

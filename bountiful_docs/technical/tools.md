@@ -37,6 +37,7 @@ wikipedia/
 {
     "name": "brave",
     "description": "Search the web with Brave Search, for news, recent events, and subjects Wikipedia doesn't cover",
+    "narration": "I'm checking the web…",
     "sends": "What the agent searches for goes to Brave Search (search.brave.com), under your Brave Search API key. ...",
     "keys": [
         {"name": "api_key", "label": "Brave Search API key"}
@@ -44,6 +45,7 @@ wikipedia/
 }
 ```
 
+- **`narration`** is what the agent says on the web page while one of the group's tools runs, in its own voice, such as "I'm checking the Web…". A group without one gets "I'm using one of my tools…".
 - **`sends`** says what leaves your computer when the tools are used. `bountiful add` shows it before it adds the group.
 - **`keys`** lists the secrets the group needs. `bountiful add` asks for each one.
 - **`dependencies`**, in a custom group, lists Python packages the group needs. `build.py` installs them.

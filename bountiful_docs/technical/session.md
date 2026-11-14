@@ -21,6 +21,7 @@ with Session.open(agent_path, data_dir) as session:
 - **`send`** answers a message. It returns the reply as soon as the reply is written and the turn is saved.
 - **`update_memory`** runs a fold. A front end calls it when a reply says one is due, and shows "Updating memory…" while it runs.
 - **`close`** stops every server the session started. The `with` block calls it when the front end stops, however it stops.
+- **`events`** tells a front end what the agent is doing while it answers. A front end calls `events.listen()` and reads each event from the queue it gets back: today, the narration of each tool as it starts.
 - **`interrupt`** stops the turn in progress. A front end can call it from another thread while `send` is still answering.
 
 A front end can also ask for the recent messages with **`history`**, and for the settings to show with **`controls`**. It changes those settings with **`select_model`**, **`set_reasoning`**, and **`set_effort`**.

@@ -1,6 +1,7 @@
 {
     "name": "docs",
     "description": "Read Bountiful's documentation",
+    "narration": "I'm checking Bountiful's docs…",
     "sends": "Nothing. These tools only read the docs installed on your computer.",
     "keys": []
 }
