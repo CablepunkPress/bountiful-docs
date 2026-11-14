@@ -37,7 +37,7 @@ wikipedia/
 {
     "name": "brave",
     "description": "Search the web with Brave Search, for news, recent events, and subjects Wikipedia doesn't cover",
-    "narration": "I'm checking the web…",
+    "narration": "I'm checking the Web…",
     "sends": "What the agent searches for goes to Brave Search (search.brave.com), under your Brave Search API key. ...",
     "keys": [
         {"name": "api_key", "label": "Brave Search API key"}
