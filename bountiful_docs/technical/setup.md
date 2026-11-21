@@ -32,7 +32,7 @@ Custom tool groups, in `~/bountiful/custom/tools/`, can need Python packages of 
 
 The build checks that the tools for building llama.cpp are installed: Apple's Command Line Tools and cmake on a Mac, or cmake, a compiler, and Vulkan's files on GNU/Linux.
 
-Then it downloads llama.cpp's source code into `~/.bountiful/llama.cpp`. The version is pinned twice: by its tag, such as `v0.7.0`, and by the exact commit that tag must point to. A tag is only a label and can be moved, so the build checks the commit before it compiles anything.
+Then it downloads llama.cpp's source code into `~/.bountiful/llama.cpp`. The version is pinned twice: by its tag, such as `v1.0.0`, and by the exact commit that tag must point to. A tag is only a label and can be moved, so the build checks the commit before it compiles anything.
 
 It compiles only `llama-server`, with Metal on a Mac or Vulkan on GNU/Linux.
 
