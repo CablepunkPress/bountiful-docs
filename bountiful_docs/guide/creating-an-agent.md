@@ -45,7 +45,7 @@ Each agent lives in its own folder in your home folder, named after its ID. Alic
 - **`context/`** is a folder for notes the agent should keep in mind, such as background on a project. Its `_README.md` explains how to use it.
 - **`.gitignore`** matters only if you keep the folder in git. It keeps the agent's memory out of git.
 
-When you first start the agent, Bountiful adds a **`data/`** folder. It holds the agent's memory: its conversations and its logs.
+When you first start the agent, Bountiful adds a **`data/`** folder. It holds the agent's memory: its conversations and its logs. Each time the agent starts, Bountiful also saves a copy of its conversations in `data/backups/`, and keeps the newest 7.
 
 Because each agent is just a folder, you can look inside it, edit it, and back it up like any other folder.
 

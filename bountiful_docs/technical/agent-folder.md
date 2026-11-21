@@ -7,7 +7,7 @@ An agent is a folder in the home folder, named by its ID, such as `~/alice`. Eve
     agent.json      who the agent is, and the tool groups it has added
     persona.md      its personality
     context/        notes it keeps in mind
-    data/           its memory and its logs
+    data/           its memory, its logs, and its backups
     .gitignore      keeps data/ out of git
     config.toml     changes to its settings, only if you make one
 ```
@@ -61,6 +61,7 @@ The settings and their defaults are listed in basic-bot's `basic_bot/config.py` 
 | --- | --- | --- |
 | `max_tool_rounds` | `8` | How many rounds of tool calls one turn may make before the agent must answer. |
 | `log_reasoning` | `false` | Writes the model's reasoning to the agent's log. |
+| `backups_kept` | `7` | How many backups of the database are kept. |
 | `flask_port` | `11777` | The port of the web page. |
 | `chat_port`, `summary_port`, `embedding_port` | `11555`, `11444`, `11333` | The ports of the three model servers. |
 
@@ -68,7 +69,7 @@ The file is read once, when the agent starts.
 
 ## data/
 
-`data/` is the agent's memory and its logs:
+`data/` is the agent's memory, its logs, and its backups:
 
 ```
 data/
@@ -76,11 +77,15 @@ data/
     logs/agent/alice.log    what the agent did
     logs/server/            what the model servers did
     slots/                  the chat server's saved cache
+    backups/                copies of the database
+    alice.lock              marks the agent as running
 ```
 
 - **The database**, `ID.db`, is a SQLite file. It holds every message, the summary, and what's needed to search them.
 - **The agent log** records each session's start and end, settings changes, tool calls, folds, and how long each request took. It's rotated, so it never grows past a fixed size.
 - **The server logs** have one file for each time a model server ran. The newest 20 of each kind are kept.
 - **The slots** hold the chat server's cache, saved when it stops and loaded when it starts again, so the conversation doesn't have to be read again from the start.
+- **The backups** are copies of the database, one made each time the agent starts, named with the time it was made in UTC, such as `alice-backup-2026-11-20T223000Z.db`. The newest 7 are kept (`backups_kept`). They're on the same drive as the database, so they guard against a damaged or deleted database, not a failed drive.
+- **The lock**, `ID.lock`, is held while the agent runs, so the same agent can't be started twice at once. A second start is refused with "Alice is already running, in another window or terminal." The lock is let go when the agent stops, however it stops.
 
 `.gitignore` keeps `data/` out of git, so if you keep the agent's folder in git, its memory can't be pushed anywhere by accident.

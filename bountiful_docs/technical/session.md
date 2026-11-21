@@ -16,8 +16,8 @@ with Session.open(agent_path, data_dir) as session:
         session.update_memory()
 ```
 
-- **`Session.open`** gets the agent ready. It reads `agent.json` and `config.toml`, starts the agent's log, and builds the runtime. Nothing is running yet.
-- **`start`** starts the chat model's server.
+- **`Session.open`** gets the agent ready. It locks the agent, so it can't be started twice at once, then reads `agent.json` and `config.toml`, starts the agent's log, and builds the runtime. Nothing is running yet.
+- **`start`** starts the chat model's server, then backs up the database.
 - **`send`** answers a message. It returns the reply as soon as the reply is written and the turn is saved.
 - **`update_memory`** runs a fold. A front end calls it when a reply says one is due, and shows "Updating memory…" while it runs.
 - **`close`** stops every server the session started. The `with` block calls it when the front end stops, however it stops.
