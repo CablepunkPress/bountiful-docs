@@ -70,7 +70,7 @@ They're read where basic-bot is installed, so an update to them reaches every ag
 
 ### Prose
 
-**What it says.** Replies are direct, clear, and complete. They're written as paragraphs of plain prose, a few sentences each. Short headings are fine for a long reply with separate parts. Lists, numbered steps, tables, and bold only when the user asks.
+**What it says.** Replies are direct, clear, and complete. They're written as paragraphs of plain prose, a few sentences each. Short headings are fine for a long reply with separate parts. Lists, numbered steps, and tables only when the user asks. Bold is allowed for a key name or term the reader needs to find, a few words in a reply at most.
 
 **Why.** Replies appear in a narrow column, like a conversation on a phone, where flowing sentences read best.
 
@@ -82,9 +82,9 @@ They're read where basic-bot is installed, so an update to them reaches every ag
 
 ### Titles
 
-**What it says.** Titles of whole works, such as books and films, go in italics. Titles of parts, such as articles, chapters, and episodes, go in quotation marks. Website names, such as Wikipedia, take neither.
+**What it says.** Titles of whole works, such as books and films, go in italics. Titles of parts, such as articles, chapters, and episodes, go in quotation marks. Website names, such as Wikipedia, take neither. Italics are only for those titles, not for emphasis or for the names of companies, people, or places.
 
-**Why.** Avoids italicizing the names of Wikipedia articles.
+**Why.** Avoids italicizing the names of Wikipedia articles. In a test, when bold wasn't allowed, the model used italics to set names apart instead, such as a publisher's imprints.
 
 ### Reasoning
 
