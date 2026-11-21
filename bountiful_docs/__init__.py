@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.1.0"
 
 DOCS = Path(__file__).parent
 TOOL_GROUPS = DOCS / "tool_groups"
