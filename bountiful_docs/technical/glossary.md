@@ -6,8 +6,6 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **Agent folder.** The folder that holds one agent, such as `~/alice`. Everything that belongs to that agent is in it.
 
-**Annotation.** A hidden note at the start of each message in the prompt, giving its number, when it was written, and, for a reply, which tools it used.
-
 **API key.** A secret code, like a password, that lets a program use an online service on your account.
 
 **Archive.** Every message an agent and its user have exchanged, kept word for word in its database, which the agent searches with its memory tools.
@@ -27,6 +25,8 @@ What the words in these docs mean. These are also the names we've agreed on, for
 **Context.** The notes in an agent's `context/` folder, which the agent is given every turn.
 
 **Context window.** How much text a model can hold in mind at once, measured in tokens.
+
+**Core tools.** The tool groups that come with basic-bot, so every agent has them: memory, for searching its past conversations, and system, for the date and time. They can't be added or removed.
 
 **Custom tools.** Plugin tools the user writes, kept in `~/bountiful/custom/tools/`.
 
@@ -58,7 +58,7 @@ What the words in these docs mean. These are also the names we've agreed on, for
 
 **llama-server.** llama.cpp's server. Bountiful runs one for each of the three models.
 
-**Memory tools.** The tools for searching an agent's past conversations, `search_archive` and `recall_message`. They come with basic-bot, so every agent has them.
+**Memory tools.** The tools for searching an agent's past conversations, `search_archive` and `recall_message`. They're core tools, so every agent has them.
 
 **Metal.** Apple's way for programs to use a Mac's graphics chip. llama.cpp uses it on a Mac.
 

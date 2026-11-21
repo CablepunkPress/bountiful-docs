@@ -2,7 +2,7 @@
 
 The instructions are the second section of the system prompt. They come with basic-bot, in `basic_bot/instructions/`, and every agent gets the same ones:
 
-- **`capabilities.md`** explains the agent's memory, its annotations, and how to use its tools and its own knowledge.
+- **`capabilities.md`** explains the agent's memory, the time, and how to use its tools and its own knowledge.
 - **`identity.md`** says what the agent is, and where to look for answers about Bountiful.
 - **`output.md`** explains how to write its replies.
 
@@ -12,21 +12,15 @@ They're read where basic-bot is installed, so an update to them reaches every ag
 
 ### Memory
 
-**What it says.** The agent's memory has three layers: the recent messages, the summary under the MEMORY heading, and the archive it reaches with its memory tools. To remember something, it starts with the recent messages, then the summary, then searches the archive before saying it doesn't remember. Questions like "do you remember" are signals to search. `search_archive` is for when it knows the subject, and `recall_message` for when it knows the message number or the date.
+**What it says.** The agent's memory has three layers: the recent messages, the summary under the MEMORY heading, and the archive it reaches with its memory tools. To remember something, it starts with the recent messages, then the summary, then searches the archive before saying it doesn't remember. Questions like "do you remember" are signals to search. `search_archive` is for when it knows the subject, and `recall_message` for when it knows the message number or the date. Every message has a number, which the user sees and the agent sees only in what its memory tools return, along with when each message was written and which tools each reply used.
 
 **Why.** The model can't see how its memory works unless it's told. Without this, it says it doesn't remember things that are in its archive.
 
-### Annotations
-
-**What it says.** The agent begins each reply with its first word of content. The system adds an annotation to the start of every message, the agent's replies included, after it is written, and the agent never writes one itself. Then, what each part of an annotation means: `seq`, `created_at`, and for a reply, the tools it used. The user doesn't type or see annotations. If the user asks what an annotation says, the agent tells them.
-
-**Why.** The annotations are only useful if the model can read them. Every message in the prompt starts with one, so a model tends to copy the pattern and start its own replies with an annotation, filled in with a made-up time. Saying first who writes them, and that the agent never does, works against that. basic-bot also removes any the model writes, so they're never saved.
-
 ### The time
 
-**What it says.** The `created_at` of the user's latest message is when they sent it. When the user asks the date or time, the agent gives that time, says it's UTC, and says it's the time of their message. It takes precedence over any date mentioned earlier.
+**What it says.** The agent has no clock, and neither its training nor the conversation tells it the date. When it needs the date, the day, or the time, it calls `date_and_time`. What that returns takes precedence over any date mentioned earlier.
 
-**Why.** The agent has no clock. The annotation is how it knows the time, and saying it's UTC and the time of the message keeps the answer exact.
+**Why.** A model has only its training and what's in front of it, so without a tool it guesses the date from what it last saw. The conversation goes into the prompt without notes in the messages: in tests, when each message started with a note giving its number, time, and tools, the model copied the notes into its own replies, and wrote one claiming a search it never made.
 
 ### Models and settings
 
@@ -36,7 +30,7 @@ They're read where basic-bot is installed, so an update to them reaches every ag
 
 ### Tool results and honesty about lookups
 
-**What it says.** Tool results come from the system, not from the user. A result lasts only for the turn the tool was called in; in later turns the annotation shows only that a tool was used, so to see a result again, the agent calls the tool again. The agent only says it looked something up when it called a tool for it this turn. Whether an earlier reply used a tool is in that reply's annotation. It never says it will check something, or that it has, unless it calls the tool this turn.
+**What it says.** Tool results come from the system, not from the user. A result lasts only for the turn the tool was called in. Earlier turns show the calls before each reply, with a note in place of each result, so to see a result again, the agent calls the tool again. The agent only says it looked something up when it called a tool for it this turn. Whether an earlier reply used a tool shows in the calls before it. It never says it will check something, or that it has, unless it calls the tool this turn.
 
 **Why.** The model can't tell that a past result is gone. In a test, asked for the date of a message it had looked up the turn before, the agent treated its own earlier reply as the tool's result, decided the tool had never given a date, and asked the user instead of looking again. Models also claim lookups they never made.
 

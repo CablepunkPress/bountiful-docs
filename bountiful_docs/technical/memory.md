@@ -45,7 +45,7 @@ If either step fails, the summary doesn't move. The same 20 messages are folded 
 
 The summary keeps the gist: the important facts, preferences, and decisions. It's written to a fixed shape, a set number of paragraphs, so it doesn't grow longer with every fold. The archive keeps the exact words.
 
-The summary model is shown which tools each reply used, the same way the chat model sees them in the annotations. This lets the summary tell what the agent looked up from what it said on its own.
+The summary model is shown which tools each reply used, the same way the memory tools show them. This lets the summary tell what the agent looked up from what it said on its own.
 
 A message far longer than usual is cut for the summary model, with a note saying how long it was. The message itself stays whole in the database.
 
@@ -56,6 +56,8 @@ Every agent has two tools for reaching its archive.
 **`search_archive`** searches by meaning. The agent gives it a few words, such as "the trip to Lisbon". The embedding model turns them into an embedding, and the archive finds the five pairs of messages whose embeddings are closest. Each pair has a score for how close it is, and a pair scoring below 0.25 (`rag_min_score`) is left out, since it isn't really about the subject. Then the search shows the pairs that are left, read from the `messages` table, best match first, each with its number. If none are left, it says nothing close was found. The chat server stops while the embedding server runs.
 
 **`recall_message`** looks messages up exactly: by number, by a range of numbers, or by dates. Unlike `search_archive`, it reads the database directly and needs no model.
+
+Both tools show each message with its number, when it was written, in UTC, and for a reply, the tools it used. This is the only place the agent sees a message's number and time.
 
 A message that's far longer than usual is shown cut, with a note saying how long it is. A result that would be too long shows as many messages as fit, and says how to ask for the rest.
 

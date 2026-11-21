@@ -33,27 +33,11 @@ The first three sections are put together once, when the session opens. The memo
 
 After the system prompt comes the transcript: every message since the summary ends, word for word, and then your new message.
 
-Each message starts with an annotation, a hidden note that tells the model which message it is and when it was written:
+The messages go in as they were written, with nothing added. A reply that used tools comes after the calls it made, each followed by a short note in place of the tool's result, such as "Result from an earlier turn, not kept. The reply after it was written from it. To see it again, call the tool again." The note says instead when a call found nothing, failed, or wasn't run, and names the sites a result came from. The calls and notes are shown the way the model's chat template shows tool calls during a turn, so the model can see which of its replies came from a lookup, and what a real call looks like.
 
-```
-<!-- seq:107 created_at:2026-10-11T21:50:13+00:00 -->
-```
+Each message also has a number, its place in the whole conversation starting at 1, and a time. The model sees these only when it asks for them with its memory tools, as part of their results.
 
-- **`seq`** is the message's number in the whole conversation, starting at 1.
-- **`created_at`** is when the message was written, in UTC.
-
-An agent's reply also says which tools it used to write it, and which sites their answers came from:
-
-```
-<!-- seq:108 created_at:… tools:read_wikipedia(title="Brazil (1985 film)") → en.wikipedia.org -->
-<!-- seq:110 created_at:… tools:none -->
-```
-
-`tools:none` means the reply was written without a tool.
-
-The annotation on your new message is how the model knows the current time.
-
-Annotations are added each time the prompt is built. They're never stored in the database, and the agent's replies are cleaned of any that the model writes. Any other note the model writes in the same form, `<!-- … -->`, is taken out of its reply too, except inside a block of code.
+Any note the model writes in its reply in the form `<!-- … -->` is taken out before the reply is saved, except inside a block of code.
 
 ## The tools
 
@@ -67,11 +51,11 @@ The Gemma 4 chat template puts them at the end of the system prompt, after the m
 
 When the model calls a tool, its call and the tool's result are added to the end of the transcript, and the model is asked again. This repeats until the model answers without calling a tool. The model's reasoning before each call is kept too, so it can follow its own plan through the turn.
 
-Only the final reply is saved. The tool calls and their results last only for that turn. What stays is the record of which tools were used, which shows in the reply's annotation.
+Only the final reply is saved, with a record of the calls the turn made. The results last only for that turn. On later turns, each call is shown before the reply with its note in place of the result.
 
 After 8 rounds of tool calls, set by `max_tool_rounds`, further calls aren't run. The model is told to answer with what it has found.
 
-Sometimes the model plans to call a tool, then answers without calling it, and makes up what the tool would have found. basic-bot watches for this at the start of a turn. When the reply makes no call but writes one of the agent's tools out as if calling it, such as `search_archive(query="Gretel")`, even inside a made-up annotation, or when the model's reasoning names one of its tools and the reply doesn't name it at all, basic-bot sets the reply aside and asks again. A tool named in the reply in passing, as when the agent lists its tools, doesn't count. It gives the model its own reasoning back, with one more line in its own voice: that it planned to call the tool and hasn't yet, so it will call it now. This happens at most once a turn. It costs a second or two, and only on the turns that need it.
+Sometimes the model plans to call a tool, then answers without calling it, and makes up what the tool would have found. basic-bot watches for this at the start of a turn. When the reply makes no call but writes one of the agent's tools out as if calling it, such as `search_archive(query="Gretel")`, even inside a made-up note, or when the model's reasoning names one of its tools and the reply doesn't name it at all, basic-bot sets the reply aside and asks again. A tool named in the reply in passing, as when the agent lists its tools, doesn't count. It gives the model its own reasoning back, with one more line in its own voice: that it planned to call the tool and hasn't yet, so it will call it now. This happens at most once a turn. It costs a second or two, and only on the turns that need it.
 
 A reply can also run past the longest a reply may be, set by `max_tokens`. That only happens when something has gone wrong, such as the model repeating itself. The reply is then saved cut short, at 4,000 characters, with a note saying so, so it doesn't fill the conversation the agent rereads every turn.
 
@@ -83,4 +67,4 @@ The chat model's profile gives a prefill: the opening words of its reasoning. ba
 
 The prompt goes from what changes least to what changes most: the persona and instructions never change while the agent runs, the memory changes only at a fold, and the transcript only grows at the end. The chat server keeps what it has already read, so each new message only has to add the part that's new.
 
-Nothing that changes from turn to turn is written into the system prompt. The current time comes from the newest message's annotation, and the model and its settings reach the model through its server.
+Nothing that changes from turn to turn is written into the prompt. The model asks for the current time with its `date_and_time` tool, and the model and its settings reach the model through its server.

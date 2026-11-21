@@ -57,7 +57,7 @@ To replace the key later, run `bountiful add brave alice` again.
 bountiful tools alice
 ```
 
-This lists every tool the agent has: its memory tools, the tools every agent has, and the plugins added to it.
+This lists every tool the agent has: its core tools, for its memory and the date and time, the tools Bountiful gives every agent, and the plugins added to it.
 
 ## Remove a tool group
 

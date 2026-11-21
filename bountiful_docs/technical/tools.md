@@ -6,17 +6,17 @@ A tool is plain Python. The chat model never runs a tool itself. It writes a too
 
 | Kind | Where it comes from | Who has it |
 | --- | --- | --- |
-| Memory tools | basic-bot's memory group, `basic_bot/tool_groups/memory/` | every agent |
+| Core tools | basic-bot's memory and system groups, in `basic_bot/tool_groups/` | every agent |
 | Built-in tools | the groups Bountiful gives every agent, named in the `bountiful` command | every agent |
 | Plugin tools | an installed package, such as extend-a-bot's `tool_box/`, or `~/bountiful/custom/tools/` | agents that have added them |
 
-The memory tools are the memory group, `search_archive` and `recall_message`, explained in [Memory](memory.md). Like every group, it's a folder with a `tool.json`.
+The core tools come with basic-bot. The memory group has `search_archive` and `recall_message`, explained in [Memory](memory.md). The system group has `date_and_time`, which reads the date and time from your computer, in its own time zone and in UTC. Like every group, each is a folder with a `tool.json`.
 
 Bountiful has one built-in group, docs, which comes with bountiful-docs. Its two tools read these docs: `list_docs` lists every page with its title, and `read_doc` reads one page whole. Built-in tools can't be added or removed.
 
 Plugin tools are added and removed one agent at a time. Plugins you write yourself are custom tools, and live in `~/bountiful/custom/tools/`.
 
-basic-bot runs every tool, but only the memory tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_groups` entry point, and basic-bot finds it there. bountiful-docs plugs its docs group into the same jack.
+basic-bot runs every tool, but only the core tools belong to it. It never names a plugin or a custom group (such as wikipedia or google) in its code. A package offers plugin tools by plugging into basic-bot's tools jack: extend-a-bot's `pyproject.toml` declares its `tool_box/` folder under the `basic_bot.tool_groups` entry point, and basic-bot finds it there. bountiful-docs plugs its docs group into the same jack.
 
 ## Tool groups
 
@@ -63,11 +63,11 @@ A group has no instructions of its own in the system prompt. What the model need
 
 `bountiful tools` lists the plugins any agent can add: extend-a-bot's and your custom ones. For each it shows where it comes from, `extend-a-bot` or `custom`, the names of its tools, a line about it, and the agents that have added it.
 
-`bountiful tools ID` lists every tool one agent has, in three parts: **Memory**, **Built-in**, and **Plugins**, each with where it comes from. A plugin named in `agent.json` that isn't installed shows as `not installed`. The agent still starts, without it, and its log says so.
+`bountiful tools ID` lists every tool one agent has, in three parts: **Core**, **Built-in**, and **Plugins**, each with where it comes from. A plugin named in `agent.json` that isn't installed shows as `not installed`. The agent still starts, without it, and its log says so.
 
 extend-a-bot is the plugin manager. It finds the plugins, and `bountiful add` and `bountiful remove` use it to add and remove them.
 
-The memory group and the built-in groups can't be added or removed.
+The core groups and the built-in groups can't be added or removed.
 
 ## Adding a group to an agent
 
@@ -98,6 +98,6 @@ basic-bot keeps a record of every tool call in a turn, saved with the agent's re
 - **`outcome`**: `ok`, `error`, `nothing found`, or `refused` past the round limit,
 - **`sources`**, the pages the result came from.
 
-A tool names its sources with a `sources` list in its result. basic-bot moves them into the record and takes them out of the result before the model reads it. The reply's annotation shows the record on later turns, so the model knows which of its past answers came from a lookup.
+A tool names its sources with a `sources` list in its result. basic-bot moves them into the record and takes them out of the result before the model reads it. On later turns each call in the record is shown before its reply, with a short note in place of the result, so the model knows which of its past answers came from a lookup. The memory tools show the record too.
 
 The Wikipedia, Brave, and docs results also end with a `cite` line, which tells the model to name its source in its reply. A docs result names its page in a `source` field instead of a `sources` list, because the page has no web address, and the call's record already shows which page was read.
