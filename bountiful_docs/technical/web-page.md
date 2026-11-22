@@ -15,7 +15,7 @@ The server listens only on `127.0.0.1`, so the page can only be opened on your o
 
 - **Flask** answers each request from the browser.
 - **Jinja templates**, in `basic_ui/templates/`, are the HTML. `index.html` is the page, and the files in `partials/` are the pieces that get added to it.
-- **HTMX**, in `static/js/htmx.js`, sends a request when you press Send, and puts the HTML that comes back into the page. The page never reloads.
+- **`static/js/app.js`**, the page's own script, sends a request when you press Send, and puts the HTML that comes back into the page. The page never reloads. It's plain JavaScript, with no outside libraries.
 - **`static/css/styles.css`** is how the page looks.
 
 The browser keeps nothing of its own. The session holds the conversation and the settings, and every request gets back the HTML to show.
@@ -71,4 +71,4 @@ A reply is written by a model, so the page treats it as untrusted:
 - The page loads nothing from anywhere else on the internet. Every file it uses comes from basic-ui itself.
 - The page runs no scripts but its own, can't be put inside another website's page, and only sends requests back to its own server.
 - The server only answers requests addressed to `localhost` or `127.0.0.1`. A website can't trick your browser into treating the page as its own.
-- The server refuses a message sent from any other page. A website you visit can't send your agent messages.
+- The server refuses a message sent from any other page. The page's script marks each request with a header of its own, which a website can't add to a request it sends to another server, so a website you visit can't send your agent messages.
