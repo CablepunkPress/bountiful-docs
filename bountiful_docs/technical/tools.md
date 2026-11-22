@@ -10,7 +10,7 @@ A tool is plain Python. The chat model never runs a tool itself. It writes a too
 | Built-in tools | the groups Bountiful gives every agent, named in the `bountiful` command | every agent |
 | Plugin tools | an installed package, such as extend-a-bot's `tool_box/`, or `~/bountiful/custom/tools/` | agents that have added them |
 
-The core tools come with basic-bot. The memory group has `search_archive` and `recall_message`, explained in [Memory](memory.md). The system group has `date_and_time`, which reads the date and time from your computer, in its own time zone and in UTC. Like every group, each is a folder with a `tool.json`.
+The core tools come with basic-bot. The memory group has `search_archive` and `recall_message`, explained in [Memory](memory.md). The system group has `date_and_time`, which reads the date and time from your computer, in its own time zone and in UTC. The agent tells you the time in your own time zone unless you ask for UTC. Like every group, each is a folder with a `tool.json`.
 
 Bountiful has one built-in group, docs, which comes with bountiful-docs. Its two tools read these docs: `list_docs` lists every page with its title, and `read_doc` reads one page whole. Built-in tools can't be added or removed.
 

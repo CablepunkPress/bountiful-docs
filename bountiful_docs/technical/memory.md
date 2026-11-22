@@ -55,7 +55,7 @@ Every agent has two tools for reaching its archive.
 
 **`search_archive`** searches by meaning. The agent gives it a few words, such as "the trip to Lisbon". The embedding model turns them into an embedding, and the archive finds the five pairs of messages whose embeddings are closest. Each pair has a score for how close it is, and a pair scoring below 0.25 (`rag_min_score`) is left out, since it isn't really about the subject. Then the search shows the pairs that are left, read from the `messages` table, best match first, each with its number. If none are left, it says nothing close was found. The chat server stops while the embedding server runs.
 
-**`recall_message`** looks messages up exactly: by number, by a range of numbers, or by dates. Unlike `search_archive`, it reads the database directly and needs no model.
+**`recall_message`** looks messages up exactly: by number, by a range of numbers, or by dates. Unlike `search_archive`, it reads the database directly and needs no model. Dates are UTC days, and both the first and the last day are included, so one day is the same date given twice. A date search shows up to 50 messages, oldest first. It also says how many messages matched and how many each day has, so a day with none is plain even when other days filled the result, and where to read on.
 
 Both tools show each message with its number, when it was written, in UTC, and for a reply, the tools it used. This is the only place the agent sees a message's number and time.
 
