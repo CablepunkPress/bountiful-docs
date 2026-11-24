@@ -29,7 +29,7 @@ The profile, chosen by the setup, says how to start each server: which model fil
 - **The reasoning prefill**, the opening words of its reasoning on every turn.
 - **Sampling**: temperature 1.0, top-p 0.95, top-k 64, as Google recommends for Gemma 4. These settings decide how the model picks each next word.
 
-On a Mac, the chat model also has a drafter. A drafter is a small, fast helper that guesses the next few tokens. The chat model checks all the guesses in one step and keeps the ones it agrees with. The answer is exactly the model's own, but it comes faster.
+The chat model also has a drafter. A drafter is a small, fast helper that guesses the next few tokens. The chat model checks all the guesses in one step and keeps the ones it agrees with. The answer is exactly the model's own, but it comes faster.
 
 On GNU/Linux, the chat model doesn't all fit on a 12 GB graphics card. llama.cpp works out how much fits, and keeps the rest in the computer's system memory, where the processor runs it.
 

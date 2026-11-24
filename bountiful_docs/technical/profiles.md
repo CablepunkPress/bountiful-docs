@@ -72,10 +72,9 @@ A profile can list more than one chat model. Then the web page's drawer lets you
 
 ## How the two differ
 
-Both profiles use the same chat model and the same embedding model. They differ where the hardware does:
+Both profiles use the same chat model, with the same drafter, and the same embedding model. They differ where the hardware does:
 
 - **The summary model** is Gemma 4 12B in both, a little smaller on GNU/Linux (Q5_K_M against Q6_K_L) to fit the 12 GB card.
-- **The drafter** is only on the Mac.
 - **The chat model** fits wholly in a Mac's memory. On the 12 GB card, llama.cpp keeps part of it in system memory, where the processor runs it.
 
 Every profile is checked when the setup chooses it, and again each time an agent starts. A mistake in a profile is reported with a message that says what's wrong, before the agent starts talking.
