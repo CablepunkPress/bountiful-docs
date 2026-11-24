@@ -45,6 +45,8 @@ If either step fails, the summary doesn't move. The same 20 messages are folded 
 
 The summary keeps the gist: the important facts, preferences, and decisions. It's written to a fixed shape, a set number of paragraphs, so it doesn't grow longer with every fold. The archive keeps the exact words.
 
+The summary leaves out the agent's own setup: its model, its settings, which tools it has, and any date or time it reported, and any changes to them. These change often, and the agent always gets them fresh with each message, so a summary that recorded them would soon be wrong. In tests, summaries that kept them told the agent it had tools it no longer had, or gave it an old time as the current one.
+
 The summary model is shown which tools each reply used, the same way the memory tools show them. This lets the summary tell what the agent looked up from what it said on its own.
 
 A message far longer than usual is cut for the summary model, with a note saying how long it was. The message itself stays whole in the database.
